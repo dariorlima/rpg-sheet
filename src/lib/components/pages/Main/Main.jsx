@@ -3,7 +3,7 @@ import React from 'react';
 import Page from '@templates/Page';
 import { PageHeader } from 'antd';
 import Details from '@organisms/Details';
-import Habilities from '@organisms/Habilities';
+import Attributes from '@organisms/Attributes';
 
 function Main() {
 	return (
@@ -11,7 +11,7 @@ function Main() {
 			<PageHeader >
 				<Details />
 				<br />
-				<Habilities />
+				<Attributes />
 			</PageHeader>
 		</Page>
 	);

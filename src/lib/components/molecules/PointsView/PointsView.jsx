@@ -1,37 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Progress, Button, List, Tag } from 'antd';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as CharacterActions from '@redux/actions/characterActions';
 
-function PointsView({ actualPoints, label, pericies }) {
-	const [_pericies, setPericies] = useState(pericies);
-	const [_actualPoints, setActualPoints] = useState(actualPoints);
+function PointsView({ attribute, pb, increaseAttr, decreaseAttr, recalcModifiers, updateSkills }) {
+	const [_skills, setSkills] = useState([]);
+	const [_actualPoints, setActualPoints] = useState(0);
 
+	useEffect(() => {
+		setActualPoints(attribute.value);
+		setSkills(attribute['skills']);
+	},[attribute]);
+
+	useEffect(() => {
+		if(_skills.length > 0)
+			updateSkills(attribute, _skills);
+	}, [_skills]);
 
 	const percentage = (_actualPoints * 100) / 20;
 
-	const pericyClick = ({ label, ...rest }) => {
-		setPericies(_pericies.map(p => {
-			if(p.label === label) {
+	const onClickSkill = ({ label, value }) => {
+		setSkills(_skills.map(skill => {
+			if(skill.label === label) {
 				return {
-					...rest,
 					label, 
-					hasProef: !p.hasProef
-				}
+					value,
+					hasProef: !skill.hasProef
+				};
 			}
-			return p;
-		}))
-
-	}
+			return skill;
+		}));
+	};
 	
-	const calc = (value, hasProef) => {
-		const rest = () => {
-			const _rest = (value - 10) / 2;
+	const SkillPoint = (hasProef) => {
+		return hasProef ? attribute['modifier'] + pb : attribute['modifier'];
+	};
 
-			return _rest > 0 ? Math.floor(_rest): _rest;
-		}
-
-		return hasProef ? rest() + 2 : rest();
+	if(!attribute){
+		return false;
 	}
 
 	return (
@@ -45,7 +54,7 @@ function PointsView({ actualPoints, label, pericies }) {
 					}}
 					format={() =>
 						<span style={{ color: 'white' }}>
-							{`${label} ${_actualPoints}`}
+							{`${attribute.label} ${_actualPoints}`}
 						</span>
 					}
 				/>
@@ -56,34 +65,40 @@ function PointsView({ actualPoints, label, pericies }) {
 					<Button
 						type="danger"
 						icon={<MinusOutlined />}
-						onClick={() => setActualPoints(_actualPoints - 1)}
+						onClick={() => {
+							decreaseAttr(attribute);
+							recalcModifiers();
+						}}
 					/>
 					<Button
 						type="danger"
 						icon={<PlusOutlined />}
-						onClick={() => setActualPoints(_actualPoints + 1)}
+						onClick={() => {
+							increaseAttr(attribute);
+							recalcModifiers();
+						}}
 					/>
 				</Button.Group>
 			</div>
 			<br />
-			{_pericies && (
+			{_skills && (
 				<div>
 					<List
-						dataSource={_pericies}
-						renderItem={(item) => {
+						dataSource={_skills}
+						renderItem={(skill) => {
 							return (
 								<List.Item  
 									style={{display:'flex', justifyContent: 'space-between'}}
 								>
-									<span style={{color: 'white'}}>{item.label}</span>
+									<span style={{color: 'white'}}>{skill.label}</span>
 									<Tag 
-										color={item.hasProef && `gold`}
-										onClick={() => pericyClick(item)}
+										color={skill.hasProef && 'gold'}
+										onClick={() => onClickSkill(skill)}
 									>
-										{calc(_actualPoints, item.hasProef)}
+										{SkillPoint(skill.hasProef)}
 									</Tag>
 								</List.Item>
-							)
+							);
 						}}
 					/>
 				</div>
@@ -93,13 +108,15 @@ function PointsView({ actualPoints, label, pericies }) {
 }
 
 PointsView.propTypes = {
-	actualPoints: PropTypes.number,
-	label: PropTypes.string,
-	pericies: PropTypes.array
+	attribute: PropTypes.object,
+	pb: PropTypes.number,
+	increaseAttr: PropTypes.func,
+	decreaseAttr: PropTypes.func,
+	recalcModifiers: PropTypes.func,
+	updateSkills: PropTypes.func
 };
 
-PointsView.defaultValues = {
-	actualPoints: 0
-};
+const mapDispatchToProps = dispatch =>
+	bindActionCreators(CharacterActions, dispatch);
 
-export default PointsView;
+export default connect(null, mapDispatchToProps)(PointsView);

@@ -10,6 +10,7 @@ const characterState = {
     inspiration: '',
     initiative: 0,
     personalityTraits: '',
+    featuresAndTraits: '',
     ideals: '',
     bonds: '',
     flaws: '',
@@ -17,19 +18,43 @@ const characterState = {
     armorClass: 0,
     totalPv: 0,
     currentPv: 0,
-    saving_throws: {
-        strenght: 0,
-        dextery: 0,
-        constituition: 0,
-        intelligence: 0,
-        wisdom: 0,
-        charisma: 0
-
-    },  
+    saving_throws: [
+        {   
+            key: 'strenght',
+            name: 'Força',
+            value: 0
+        },
+        {
+            key: 'dextery',
+            name: 'Destreza',
+            value: 0
+        },
+        {
+            key: 'constituition',
+            name: 'Constituição',
+            value: 0
+        },
+        {
+            key: 'intelligence',
+            name: 'Inteligência',
+            value: 0
+        },
+        {
+            key: 'wisdom',
+            name: 'Sabedoria',
+            value: 0
+        },
+        {
+            key: 'charisma',
+            name: 'Charisma',
+            value: 0
+        },
+    ],  
     attributes: {
         strenght: {
+            label: 'For.',
             modifier: 0,
-            value: 0,
+            value: 8,
             skills: [
                 {
                     label: 'Atletismo',
@@ -38,8 +63,9 @@ const characterState = {
             ]
         },
         dextery: {
+            label: 'Des.',
             modifier: 0,
-            value: 0,
+            value: 17,
             skills: [
                 {
                     label: 'Acrobacia',
@@ -56,15 +82,17 @@ const characterState = {
             ]
         },
         constituition: {
+            label: 'Const.',
             modifier: 0,
-            value: 0,
+            value: 10,
             skills: [
 
             ]
         },
         intelligence: {
+            label: 'Int.',
             modifier: 0,
-            value: 0,
+            value: 13,
             skills: [
                 {
                     label: 'Arcanismo',
@@ -89,8 +117,9 @@ const characterState = {
             ]
         },
         wisdom: {
+            label: 'Sab.',
             modifier: 0,
-            value: 0,
+            value: 15,
             skills: [
                 {
                     label: 'Intuição',
@@ -115,8 +144,9 @@ const characterState = {
             ]
         },
         charisma: {
+            label: 'Car',
             modifier: 0,
-            value: 0,
+            value: 12,
             skills: [
                 {
                     label: 'Atuação',

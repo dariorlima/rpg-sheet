@@ -10,6 +10,11 @@ function characterReducer(state = initialState, action) {
                 ...state,
                 ...action.payload
             }
+        case types.UDPATE_CHARACTER:
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state
     }
