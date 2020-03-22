@@ -7,7 +7,8 @@ export const habilitiesMap = [
 		pericies: [
 			{
 				label: 'Atletismo',
-				value: '-'
+				value: 0,
+				hasProef: true
 			}
 		]
 	},
@@ -19,15 +20,15 @@ export const habilitiesMap = [
 		pericies: [
 			{
 				label: 'Acrobacia',
-				value: '-'
+				value: 0
 			},
 			{
 				label: 'Furtividade',
-				value: '-'
+				value: 0
 			},
 			{
 				label: 'Prestidigitação',
-				value: '-'
+				value: 0
 			},
 		]
 	},
@@ -46,23 +47,23 @@ export const habilitiesMap = [
 		pericies: [
 			{
 				label: 'Arcanismo',
-				value: '-'
+				value: 0
 			},
 			{
 				label: 'Historia',
-				value: '-'
+				value: 0
 			},
 			{
 				label: 'Investigação',
-				value: '-'
+				value: 0
 			},
 			{
 				label: 'Natureza',
-				value: '-'
+				value: 0
 			},
 			{
 				label: 'Religião',
-				value: '-'
+				value: 0
 			},
 		]
 	},
@@ -78,19 +79,19 @@ export const habilitiesMap = [
 			},
 			{
 				label: 'Lidar com animais',
-				value: '-'
+				value: 0
 			},
 			{
 				label: 'Medicina',
-				value: '-'
+				value: 0
 			},
 			{
 				label: 'Percepção',
-				value: '-'
+				value: 0
 			},
 			{
 				label: 'Sobrevivencia',
-				value: '-'
+				value: 0
 			},
 		]
 	},
@@ -102,15 +103,15 @@ export const habilitiesMap = [
 		pericies: [
 			{
 				label: 'Atuação',
-				value: '-'
+				value: 0
 			},
 			{
 				label: 'Intimidação',
-				value: '-'
+				value: 0
 			},
 			{
 				label: 'Persuasão',
-				value: '-'
+				value: 0
 			},
 		]
 	}

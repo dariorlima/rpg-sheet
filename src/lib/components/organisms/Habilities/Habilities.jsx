@@ -10,9 +10,9 @@ function Habilities() {
 				return (
 					<Col md={4} key={hability.key}>
 						<PointsView 
-                            label={`${hability.label} ${hability.value}`} 
-                            pericies={hability.pericies}
-							actualPoints={(hability.value * 100) / 20}
+                            label={`${hability.label}`} 
+							pericies={hability.pericies}
+							actualPoints={hability.value}
 						/>
 					</Col>
 				);

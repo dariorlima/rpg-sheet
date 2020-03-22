@@ -24,8 +24,12 @@ function InventoryTable() {
 					columns={itemsColumns} 
 					dataSource={[
 						{
-							name:  '',
-							quantity: '',
+							name:  'Alicate',
+							quantity: 0,
+						},
+						{
+							name:  'Almofarig',
+							quantity: 0,
 						}
 					]} 
 				/>
